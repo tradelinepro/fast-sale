@@ -1,0 +1,101 @@
+{%- set product = entity -%}
+
+{%- block fast_sale_search_grid_column_price -%}
+
+    {%- block fast_sale_search_grid_column_product_delivery_information -%}
+        {%- set deliveryInformation -%}
+            {%- sw_include '@Storefront/storefront/component/delivery-information.html.twig' -%}
+        {%- endset -%}
+
+        {{- deliveryInformation|striptags('<div><p><span>')|raw -}}
+    {%- endblock -%}
+
+    {%- block fast_sale_search_grid_column_product_price -%}
+    <div class="fast-sale-product-price">
+        {%- set price = product.calculatedPrice -%}
+
+        {%- if product.calculatedPrices.count > 0 -%}
+            {%- set price = product.calculatedPrices.last -%}
+        {%- endif -%}
+
+        {%- if product.variantListingConfig.displayParent and product.parentId === null -%}
+            {%- set displayFromVariants = price.unitPrice !== product.calculatedCheapestPrice.unitPrice -%}
+
+            {%- set price = product.calculatedCheapestPrice -%}
+        {%- endif -%}
+
+        {%- set referencePrice = price.referencePrice -%}
+
+        {%- block fast_sale_search_grid_column_product_price_from -%}
+            {%- if product.calculatedPrices.count > 1 or displayFromVariants -%}
+                {%- block fast_sale_search_grid_column_product_price_from_text -%}
+                    {{- 'listing.listingTextFrom'|trans|sw_sanitize ~ ' ' -}}
+                {%- endblock -%}
+            {%- endif -%}
+        {%- endblock -%}
+
+        {%- block fast_sale_search_grid_column_product_price_suggest -%}
+            {{- price.unitPrice|currency ~ "general.star"|trans|sw_sanitize -}}
+        {%- endblock -%}
+
+        {%- block fast_sale_search_grid_column_product_price_reference -%}
+            {%- if price.referencePrice is not null -%}
+
+                {%- block fast_sale_search_grid_column_product_price_reference_inner -%}
+                <small class="fast-sale-product-price-small">
+
+                    {%- block fast_sale_search_grid_column_product_price_reference_price_text -%}
+                    {{- '(' ~ (price.referencePrice.price|currency) ~ ('general.star'|trans|sw_sanitize) ~ ' / '
+                        ~ price.referencePrice.referenceUnit ~ ' ' ~ price.referencePrice.unitName ~ ')' -}}
+                    {%- endblock -%}
+
+                </small>
+                {%- endblock -%}
+
+            {%- endif -%}
+        {%- endblock -%}
+
+        {%- block fast_sale_search_grid_column_product_price_list -%}
+            {%- if price.regulationPrice.price is not null -%}
+
+                {%- block fast_sale_search_grid_column_product_price_list_inner -%}
+                <small class="fast-sale-product-price-small">
+
+                    {%- block fast_sale_search_grid_column_product_price_list_text -%}
+                    {{- "general.listPricePreviously"|trans({ '%price%': price.regulationPrice.price|currency }) -}}
+                    {{- "general.star"|trans|sw_sanitize -}}
+                    {%- endblock -%}
+
+                </small>
+                {%- endblock -%}
+
+            {%- endif -%}
+        {%- endblock -%}
+
+        {%- block fast_sale_search_grid_column_product_price_unit -%}
+        {%- if product.purchaseUnit -%}
+
+            {%- block fast_sale_search_grid_column_product_price_unit_inner -%}
+            <div class="product-detail-price-unit">
+
+                {%- block fast_sale_search_grid_column_product_price_unit_label -%}
+                <span class="price-unit-label">
+                    {{- 'detail.priceUnitName'|trans|sw_sanitize ~ ' ' -}}
+                </span>
+                {%- endblock -%}
+
+                {%- block fast_sale_search_grid_column_product_price_unit_content -%}
+                <span class="price-unit-content">
+                    {{- product.purchaseUnit }} {{ product.unit.translated.name -}}
+                </span>
+                {%- endblock -%}
+
+            </div>
+            {%- endblock -%}
+
+        {%- endif -%}
+        {%- endblock -%}
+
+    </div>
+    {%- endblock -%}
+{%- endblock -%}

@@ -1,0 +1,51 @@
+{
+    "fast-sale": {
+        "account": {
+            "search": {
+                "title": "Fast order",
+                "hint": "Order quickly and easily using our search function."
+            },
+
+            "import": {
+                "title": "Cart import",
+                "hint": "Here you can import previously exported or self-created shopping carts."
+            }
+        },
+
+        "import": "Import",
+        "file": "File",
+        "exampleDownload": "Download example",
+        "export": "Export shopping cart",
+
+        "csv": {
+            "column1": "productNumber",
+            "column2": "stock"
+        },
+
+        "error": {
+            "allProductsNotFound": "No products have been found",
+            "productsNotFound": "These products have not been found: %productNumbers%",
+            "exactColumnsCount": "Columns count should be exactly equal 2",
+            "emptyProductNumbers": "These rows have empty product numbers: %values%",
+            "emptyQtys": "These rows have empty quantity values: %values%",
+            "notIntegerQtys": "These rows have not integer quantity values: %values%",
+            "fileEmptyOrInvalid": "File empty or invalid"
+        },
+
+        "type": {
+            "search": {
+                "headline": "Sale search",
+                "description": "Search for the product in the box below, select the desired quantity and click on the shopping cart icon."
+            },
+
+            "import": {
+                "headline": "Shopping cart import",
+                "description": "Upload a CSV/XLSX file here to quickly and easily import your desired products."
+            }
+        },
+
+        "product": "Product",
+        "price": "Price",
+        "fastsale": "Fast order"
+    }
+}

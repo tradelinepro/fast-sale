@@ -1,0 +1,32 @@
+{
+  "name": "tradelinepro/fast-sale",
+  "description": "Fast sale",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "digital.manufaktur GmbH",
+      "email": "hallo@digitalmanufaktur.com",
+      "homepage": "https://www.digitalmanufaktur.com/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "tradelinepro/core": "~0.9.0",
+    "phpoffice/phpspreadsheet": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tradelinepro\\FastSale\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Tradelinepro\\FastSale\\TradelineproFastSale",
+    "copyright": "digital.manufaktur GmbH",
+    "label": {
+      "de-DE": "Schnellbestellung",
+      "en-GB": "Fast sale"
+    }
+  },
+  "version": "0.9.0"
+}

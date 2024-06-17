@@ -1,0 +1,33 @@
+{% sw_extends '@Storefront/storefront/page/account/b2b/user-sidebar-menu.html.twig' %}
+
+{% block user_sidebar_menu_container %}
+    {% set menuItems = menuItems|merge({
+        fastSale: {
+            group: 'orders',
+            position: 10,
+            isShown: true,
+
+            link: {
+                url: path('frontend.account.fast-sale.products.search'),
+                text: 'fast-sale.account.search.title',
+            },
+
+            isActive: pathInfo is same as(fastSaleSearchLink),
+        },
+
+        fastSaleImport: {
+            group: 'orders',
+            position: 20,
+            isShown: true,
+
+            link: {
+                url: path('frontend.account.fast-sale.products.import'),
+                text: 'fast-sale.account.import.title',
+            },
+
+            isActive: pathInfo is same as(fastSaleImportLink),
+        },
+    }) %}
+
+    {{ parent() }}
+{% endblock %}

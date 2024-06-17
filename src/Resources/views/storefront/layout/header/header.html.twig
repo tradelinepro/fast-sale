@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header_actions_account %}
+    {{ parent() }}
+
+    {% block layout_header_actions_fast_sale %}
+        {% if context.customer %}
+            <div class="col-auto">
+                {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                    name: 'a',
+                    attributes: {
+                        href: path('frontend.account.fast-sale.products.search'),
+                        class: 'btn header-actions-btn',
+                        title: 'fast-sale.fastsale'|trans|striptags,
+                    },
+
+                    icon: {
+                        name: 'rocket',
+                    },
+                } %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

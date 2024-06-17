@@ -1,0 +1,93 @@
+{% set product = entity %}
+
+{% block fast_sale_search_grid_column_product %}
+    {% block fast_sale_search_grid_column_product_row %}
+    <div class="row g-2">
+
+        {% block fast_sale_search_grid_column_product_col_image_wrapper %}
+
+        {% set media = product.cover.media %}
+        {% if media and (not config('TradelineproFastSale.config.hideImagesOnFastSaleSearch')) %}
+
+        {% block fast_sale_search_grid_column_product_col_image %}
+        <div class="col-auto pe-1">
+
+            {% block fast_sale_search_grid_column_product_image_wrapper %}
+            <div class="grid-fast-sale-product-image">
+                {% block fast_sale_search_grid_column_product_images %}
+
+                {% set attributes = {
+                    alt: media.translated.alt ?: '',
+                    title: media.translated.title ?: '',
+                } %}
+
+                {% block fast_sale_search_grid_column_product_image %}
+                {% sw_thumbnails 'fast-sale-product-image-thumbnails' with {
+                    sizes: {
+                        default: '50px',
+                    },
+                } %}
+                {% endblock %}
+
+                {% block fast_sale_search_grid_column_product_image_popup_wrapper %}
+                <div class="grid-fast-sale-product-image-popup-wrapper">
+
+                    {% block fast_sale_search_grid_column_product_image_popup %}
+                    {% sw_thumbnails 'fast-sale-product-image-thumbnails' with {
+                        sizes: {
+                            default: '200px',
+                        },
+                    } %}
+                    {% endblock %}
+
+                </div>
+                {% endblock %}
+
+                {% endblock %}
+            </div>
+            {% endblock %}
+
+        </div>
+        {% endblock %}
+        {% endif %}
+        {% endblock %}
+
+        {% block fast_sale_search_grid_column_product_col_info %}
+        <div class="col px-1 mt-1">
+
+            {% block fast_sale_search_grid_column_product_link %}
+            {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                name: 'a',
+                attributes: {
+                    href: seoUrl('frontend.detail.page', { productId: product.id }),
+                    class: 'grid-fast-sale-product-link',
+                },
+
+                text: product.translated.name,
+            } %}
+            {% endblock %}
+
+            {% block fast_sale_search_grid_column_product_number %}
+            <small class="grid-fast-sale-product-number">
+                {{- product.productNumber -}}
+            </small>
+            {% endblock %}
+
+            {% block fast_sale_search_grid_column_product_variant_characteristics %}
+            {% if product.variation %}
+                {% sw_include '@Storefront/storefront/component/line-item/element/variant-characteristics.html.twig' with {
+                    lineItem: {
+                        payload: {
+                            options: product.variation,
+                        },
+                    },
+                } %}
+            {% endif %}
+            {% endblock %}
+
+        </div>
+        {% endblock %}
+
+    </div>
+    {% endblock %}
+{% endblock %}

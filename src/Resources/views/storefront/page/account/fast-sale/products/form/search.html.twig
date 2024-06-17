@@ -1,0 +1,54 @@
+{% block fast_sale_search_form %}
+{% block fast_sale_search_form_tag %}
+    {% set delay = config('TradelineproFastSale.config.delay') ? config('TradelineproFastSale.config.delay') : 250 %}
+
+    {% set fastSaleSearchOptions = {
+        delay: delay,
+        clearInputAfterXhr: config('TradelineproFastSale.config.clearInputAfterXhr')
+    } %}
+
+    <form action="{{ path('frontend.fast-sale.search') ~ '?search=' }}" method="get" class="fast-sale-search-form" data-fast-sale-search="true" data-fast-sale-search-options='{{ fastSaleSearchOptions|json_encode }}'>
+{% endblock %}
+
+    {% block fast_sale_search_form_wrapper %}
+    <div class="input-group">
+        {% block fast_sale_search_form_input_group %}
+
+        {% block fast_sale_search_form_input %}
+        {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'input',
+            attributes: {
+                type: 'search',
+                name: 'search',
+                class: 'form-control fast-sale-search-input js-fast-sale-search-input rounded-0',
+                autocomplete: 'off',
+                autocapitalize: 'off',
+                placeholder: 'header.searchPlaceholder'|trans|striptags,
+            },
+        } %}
+        {% endblock %}
+
+        {% block fast_sale_search_form_button %}
+        {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'button',
+            attributes: {
+                type: 'button',
+                class: 'btn fast-sale-search-button js-fast-sale-search-button',
+            },
+
+            icon: {
+                name: 'search',
+            },
+        } %}
+        {% endblock %}
+
+        {% block fast_sale_search_form_barcode_scanner %}
+        {% sw_include '@Storefront/storefront/barcode-scanner/form.html.twig' ignore missing %}
+        {% endblock %}
+
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+</form>
+{% endblock %}

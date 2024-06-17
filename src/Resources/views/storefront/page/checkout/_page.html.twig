@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/page/checkout/_page.html.twig' %}
+
+{% block page_checkout_aside_container %}
+    {% block page_checkout_aside_container_fast_sale_export %}
+        {% sw_include '@Storefront/storefront/fast-sale/export.html.twig' %}
+    {% endblock %}
+
+    {{ parent() }}
+{% endblock %}

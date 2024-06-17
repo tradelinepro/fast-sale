@@ -1,0 +1,56 @@
+{% block fast_sale_search_grid %}
+{% sw_include '@Storefront/storefront/component/tradelinepro/grid.html.twig' with {
+    entities: page.searchResult,
+
+    class: 'grid-fast-sale-search js-fast-sale-search-result',
+
+    head: {
+        class: 'row d-none d-sm-flex py-3 px-3 align-items-center border-top border-bottom fw-bold bg-light',
+        elements: {
+
+            product: {
+                title: 'fast-sale.product',
+                class: 'col-7 py-1 px-0 py-sm-0 pe-sm-1',
+            },
+
+            price: {
+                title: 'fast-sale.price',
+                class: 'col py-1 px-0 py-sm-0 ps-sm-1',
+            },
+        },
+    },
+    body: {
+        class: 'row align-items-center py-2 py-sm-1 border-bottom',
+        elements: {
+
+            product: {
+                template: {
+                    main: '@Storefront/storefront/fast-sale/search/grid/product.html.twig',
+                },
+
+                class: 'col-12 col-sm-7 py-1 px-0 py-sm-1 ps-sm-3 pe-sm-1',
+            },
+
+            price: {
+                template: {
+                    main: '@Storefront/storefront/fast-sale/search/grid/price.html.twig',
+                },
+
+                class: 'col-12 col-sm-2 py-1 px-0 py-sm-1 ps-sm-0 px-sm-1',
+            },
+
+            buy: {
+                template: {
+                    main: '@Storefront/storefront/fast-sale/search/grid/buy.html.twig',
+                },
+
+                class: 'col-12 col-sm py-1 px-0 py-sm-1 pe-sm-3 text-sm-end',
+            },
+        },
+    },
+
+    alert: {
+        message: 'header.searchNoResult',
+    },
+} %}
+{% endblock %}

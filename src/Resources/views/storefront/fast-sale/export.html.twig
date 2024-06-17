@@ -1,0 +1,37 @@
+{% block fast_sale_export %}
+    {% if page.extensions.fastSale.showExportButton %}
+
+        {% block fast_sale_export_row %}
+        <div class="row mx-0">
+
+            {% block fast_sale_export_col %}
+            <div class="col-12 px-0 mb-3 text-end">
+                {% block fast_sale_export_col_children %}
+
+                {% block fast_sale_export_link %}
+                {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                name: 'a',
+                    attributes: {
+                        rel: 'nofollow',
+                        href: path('frontend.fast-sale.export'),
+                        class: 'btn btn-secondary fast-sale-export-button',
+                        target: '_blank',
+                    },
+
+                    icon: {
+                        name: 'save',
+                    },
+
+                    text: 'fast-sale.export',
+                } %}
+                {% endblock %}
+
+                {% endblock %}
+            </div>
+            {% endblock %}
+
+        </div>
+        {% endblock %}
+
+    {% endif %}
+{% endblock %}

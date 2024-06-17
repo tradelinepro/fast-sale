@@ -1,0 +1,34 @@
+{%- block page_account_sidebar_menu_fast_sale -%}
+    {%- set classes = 'list-group-item list-group-item-action account-aside-item' -%}
+    {%- set display = false -%}
+
+    {%- if context.customer -%}
+        {%- set display = true -%}
+    {%- endif -%}
+
+    {%- block page_account_sidebar_menu_fast_sale_link_search -%}
+        {%- sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'a',
+            attributes: {
+                rel: 'nofollow',
+                href: path('frontend.account.fast-sale.products.search'),
+                class: { classes, 'is-active': controllerName starts with 'AccountFastSale' and page.type == 'search' },
+            },
+
+            text: 'fast-sale.type.search.headline',
+        } -%}
+    {%- endblock -%}
+
+    {%- block page_account_sidebar_menu_fast_sale_link_import -%}
+        {%- sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'a',
+            attributes: {
+                rel: 'nofollow',
+                href: path('frontend.account.fast-sale.products.import'),
+                class: { classes, 'is-active': controllerName starts with 'AccountFastSale' and page.type == 'import' },
+            },
+
+            text: 'fast-sale.type.import.headline',
+        } -%}
+    {%- endblock -%}
+{%- endblock -%}

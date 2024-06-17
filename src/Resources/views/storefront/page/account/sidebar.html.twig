@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/page/account/sidebar.html.twig' %}
+
+{% block page_account_sidebar_menu_inner %}
+    {{ parent() }}
+
+    {% block page_account_sidebar_link_fastsale %}
+        {% sw_include '@Storefront/storefront/page/account/sidebar/fast-sale.html.twig' %}
+    {% endblock %}
+{% endblock %}

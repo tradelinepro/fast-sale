@@ -1,0 +1,116 @@
+{% set product = entity %}
+
+{% block fast_sale_search_grid_column_buy %}
+    {% block fast_sale_search_buy_form %}
+        {% if not product.extensions.zeroPrice %}
+
+            {% set isAvailable = product.available and product.childCount <= 0 and product.calculatedMaxPurchase > 0 %}
+
+            {% block fast_sale_search_buy_form_tag %}
+                <form action="{{ path('frontend.checkout.line-item.add') }}" method="post" class="float-end" data-fast-sale-add-to-cart="true">
+            {% endblock %}
+
+            {% block fast_sale_search_buy_form_container %}
+                {% if isAvailable %}
+
+                    {% block fast_sale_search_buy_form_container_row %}
+                    <div class="row g-2">
+
+                        {% block fast_sale_search_buy_form_quantity_col %}
+                        <div class="col-auto px-0">
+
+                            {% block fast_sale_search_buy_form_quantity %}
+                                {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                                name: 'input',
+                                    attributes: {
+                                        type: 'number',
+                                        name: 'lineItems[' ~ product.id ~ '][quantity]',
+                                        value: product.minPurchase,
+                                        placeholder: product.minPurchase,
+                                        min: product.minPurchase,
+                                        max: product.calculatedMaxPurchase,
+                                        step: product.purchaseSteps,
+                                        class: 'form-control',
+                                    },
+                                } %}
+                            {% endblock %}
+
+                            {% block fast_sale_search_buy_form_pack_unit %}
+                                {% if product.translated.packUnit %}
+                                    <small class="float-start">
+                                        {%- if product.minPurchase > 1 and product.translated.packUnitPlural -%}
+                                            {{- product.translated.packUnitPlural -}}
+                                        {%- elseif product.translated.packUnit -%}
+                                            {{- product.translated.packUnit -}}
+                                        {%- endif -%}
+                                    </small>
+                                {% endif %}
+                            {% endblock %}
+
+                        </div>
+                        {% endblock %}
+
+                        {% block fast_sale_search_buy_form_button_col %}
+                            <div class="col-auto px-0">
+
+                                {% block fast_sale_search_buy_form_button %}
+                                    {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                                    name: 'button',
+                                        attributes: {
+                                            type: 'submit',
+                                            class: 'btn btn-primary',
+                                            title: 'detail.addProduct'|trans|striptags,
+                                        },
+
+                                        icon: {
+                                            name: 'cart',
+                                        },
+                                    } %}
+                                {% endblock %}
+
+                                {% block fast_sale_search_buy_form_redirect_input %}
+                                    <input type="hidden" name="redirectTo" value="frontend.cart.offcanvas">
+                                {% endblock %}
+
+                                {% block fast_sale_search_buy_form_info %}
+                                    <input type="hidden" name="lineItems[{{ product.id|raw }}][id]" value="{{ product.id|raw }}">
+                                    <input type="hidden" name="lineItems[{{ product.id|raw }}][type]" value="product">
+                                    <input type="hidden" name="lineItems[{{ product.id|raw }}][referencedId]" value="{{ product.id|raw }}">
+                                    <input type="hidden" name="lineItems[{{ product.id|raw }}][stackable]" value="1">
+                                    <input type="hidden" name="lineItems[{{ product.id|raw }}][removable]" value="1">
+                                {% endblock %}
+
+                            </div>
+                        {% endblock %}
+
+                    {% endblock %}
+                    </div>
+                {% else %}
+                    {% block fast_sale_search_buy_form_actions %}
+                        {% block fast_sale_search_buy_form_action_detail %}
+                            {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+                                name: 'a',
+                                attributes: {
+                                    rel: 'nofollow',
+                                    href: seoUrl('frontend.detail.page', { productId: product.id }),
+                                    class: 'btn btn-primary',
+                                    title: 'listing.boxProductDetails'|trans|striptags,
+                                    target: '_blank',
+                                },
+
+                                text: 'listing.boxProductDetails',
+                            } %}
+                        {% endblock %}
+                    {% endblock %}
+                {% endif %}
+            {% endblock %}
+
+            </form>
+
+        {% else %}
+            {% sw_include '@Storefront/storefront/component/product/zero-price/link.html.twig' ignore missing with {
+                classes: 'btn btn-primary btn-block btn-buy',
+            } %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

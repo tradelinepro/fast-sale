@@ -1,0 +1,23 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+{% block page_account_fast_sale %}
+
+{% block page_account_fast_sale_headline %}
+    {% sw_include '@Storefront/storefront/component/tradelinepro/page/headline.html.twig' with {
+        title: 'fast-sale.type.' ~ page.type ~ '.headline',
+        message: 'fast-sale.type.' ~ page.type ~ '.description',
+    } %}
+    <div {% if feature('v6.6.0.0') %}
+        data-off-canvas-cart="true"
+    {% else %}
+        data-offcanvas-cart="true"
+    {% endif %}></div>
+{% endblock %}
+
+{% block page_account_fast_sale_body %}
+    {% sw_include '@Storefront/storefront/page/account/fast-sale/products/form/' ~ page.type ~ '.html.twig' ignore missing %}
+{% endblock %}
+
+{% endblock %}
+{% endblock %}

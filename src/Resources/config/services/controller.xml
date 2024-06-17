@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * @author digital.manufaktur GmbH
+ * @link   https://www.digitalmanufaktur.com/
+ */
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true"/>
+
+        <service id="Tradelinepro\FastSale\Controller\AccountFastSaleProductsController">
+            <argument type="service" id="Tradelinepro\FastSale\Page\Account\FastSale\Products\FastSaleProductsPageLoader"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Tradelinepro\FastSale\Controller\FastSaleSearchController">
+            <argument type="service" id="Tradelinepro\FastSale\Page\FastSale\Search\SearchPageLoader"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Tradelinepro\FastSale\Controller\FastSaleImportController">
+            <argument type="service" id="kernel"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\SalesChannel\CartService"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="logger"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Tradelinepro\FastSale\Controller\FastSaleExportController">
+            <argument type="service" id="Tradelinepro\FastSale\Checkout\Cart\FastSaleExport"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+    </services>
+</container>

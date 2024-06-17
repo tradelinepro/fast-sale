@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * @author digital.manufaktur GmbH
+ * @link   https://www.digitalmanufaktur.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>General</title>
+        <title lang="de-DE">Allgemein</title>
+
+        <input-field type="bool">
+            <name>isActive</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+        </input-field>
+
+        <input-field type="bool">
+            <name>hideImagesOnFastSaleSearch</name>
+            <label>Hide images in quick sale search</label>
+            <label lang="de-DE">Bilder bei der Schnellbestellungs Suche ausblenden</label>
+        </input-field>
+
+        <input-field type="int">
+            <name>delay</name>
+            <label>Input delay</label>
+            <label lang="de-DE">Input Timeout</label>
+        </input-field>       
+ 
+        <input-field type="bool">
+            <name>clearInputAfterXhr</name>
+            <label>Clear input after search</label>
+            <label lang="de-DE">Eingabe nach der Suche löschen</label>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Import</title>
+
+        <component name="sw-media-field">
+            <name>exampleFileMediaId</name>
+            <label>Example file #1 (CSV)</label>
+            <label lang="de-DE">Beispieldatei #1 (CSV)</label>
+        </component>
+
+        <component name="sw-media-field">
+            <name>exampleFileMediaId2</name>
+            <label>Example file #2 (XLSX)</label>
+            <label lang="de-DE">Beispieldatei #2 (XLSX)</label>
+        </component>
+    </card>
+</config>

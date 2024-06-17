@@ -1,0 +1,51 @@
+{
+    "fast-sale": {
+        "account": {
+            "search": {
+                "title": "Schnellbestellung",
+                "hint": "Bestellen Sie schnell und einfach über unsere Suchfunktion."
+            },
+
+            "import": {
+                "title": "Warenkorb Import",
+                "hint": "Hier können Sie zuvor exportierte oder selbst erstellte Warenkörbe importieren."
+            }
+        },
+
+        "import": "Import",
+        "file": "Datei",
+        "exampleDownload": "Beispiel herunterladen",
+        "export": "Warenkorb exportieren",
+
+        "csv": {
+            "column1": "Produktnummer",
+            "column2": "Menge"
+        },
+
+        "error": {
+            "allProductsNotFound": "Keine Produkte gefunden",
+            "productsNotFound": "Diese Produkte wurden nicht gefunden: %productNumbers%",
+            "exactColumnsCount": "Spaltenanzahl sollte genau 2 sein",
+            "emptyProductNumbers": "Diese Zeilen enthalten leere Produktnummern: %values%",
+            "emptyQtys": "Diese Zeilen haben leere Mengenwerte: %values%",
+            "notIntegerQtys": "Diese Zeilen haben keine ganzzahligen Mengenwerte: %values%",
+            "fileEmptyOrInvalid": "Datei leer oder ungültig"
+        },
+
+        "type": {
+            "search": {
+                "headline": "Suche der Schnellbestellung",
+                "description": "Suchen Sie im Feld unten nach dem Produkt, wählen Sie die gewünschte Menge aus und klicken Sie auf das Warenkorbsymbol."
+            },
+
+            "import": {
+                "headline": "Warenkorb Import",
+                "description": "Laden Sie hier eine CSV- oder XLSX-Datei hoch, um Ihre gewünschten Produkte schnell und einfach zu importieren."
+            }
+        },
+
+        "product": "Produkt",
+        "price": "Preis",
+        "fastsale": "Schnellbestellung"
+    }
+}

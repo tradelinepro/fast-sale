@@ -1,0 +1,129 @@
+{% block fast_sale_shopping_cart_import_form %}
+{% block fast_sale_shopping_cart_import_form_tag %}
+    <form action="{{ path('frontend.fast-sale.import') }}" method="post" enctype="multipart/form-data" data-form-validation="true">
+{% endblock %}
+
+{% block fast_sale_shopping_cart_import_form_content %}
+<div class="form-content">
+    {% block fast_sale_shopping_cart_import_form_content_children %}
+
+    {% block fast_sale_shopping_cart_import_form_row_file %}
+    <div class="row g-2">
+
+        {% block fast_sale_shopping_cart_import_form_group_file %}
+        <div class="form-group col-12 mb-2">
+            {% block fast_sale_shopping_cart_import_form_group_file_children %}
+
+            {% block fast_sale_shopping_cart_import_form_label_file %}
+            <label class="form-label" for="fast-sale-import-form-file">
+                {{- "fast-sale.file"|trans|sw_sanitize }} {{ "general.required"|trans -}}
+            </label>
+            {% endblock %}
+
+            {% block fast_sale_shopping_cart_import_form_input_file %}
+            {% set accept = [
+                'text/csv',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            ] %}
+
+            {% block fast_sale_shopping_cart_import_form_input_file_tag %}
+            {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'input',
+                attributes: {
+                    type: 'file',
+                    name: 'file',
+                    id: 'fast-sale-import-form-file',
+                    class: 'form-control',
+                    accept: accept|join(','),
+                    required: true,
+                },
+            } %}
+            {% endblock %}
+            {% endblock %}
+
+            {% endblock %}
+        </div>
+        {% endblock %}
+
+    </div>
+    {% endblock %}
+
+    {% block fast_sale_shopping_cart_import_form_actions %}
+    {% block fast_sale_shopping_cart_import_form_submit %}
+    {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'button',
+        attributes: {
+            type: 'submit',
+            class: 'btn btn-primary mt-2',
+        },
+
+        text: 'fast-sale.import',
+    } %}
+    {% endblock %}
+
+    {% block fast_sale_shopping_cart_import_form_example_downloads %}
+    {% block fast_sale_shopping_cart_import_form_example_download %}
+        {% set exampleFileMediaId = config('TradelineproFastSale.config.exampleFileMediaId') %}
+
+        {% if exampleFileMediaId %}
+            {% set mediaCollection = searchMedia([exampleFileMediaId], context.context) %}
+
+            {% if mediaCollection and mediaCollection|length > 0 %}
+                {% set media = mediaCollection.get(exampleFileMediaId) %}
+
+                {% block fast_sale_shopping_cart_import_form_example_download_inner %}
+                {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'a',
+                    attributes: {
+                        rel: 'nofollow',
+                        href: media.url,
+                        class: 'btn btn-secondary mt-2',
+                        target: '_blank',
+                    },
+
+                    text: 'fast-sale.exampleDownload'|trans|sw_sanitize ~ ' (' ~ media.fileExtension|upper ~ ')',
+                } %}
+                {% endblock %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+    {% block fast_sale_shopping_cart_import_form_example_download2 %}
+        {% set exampleFileMediaId = config('TradelineproFastSale.config.exampleFileMediaId2') %}
+
+        {% if exampleFileMediaId %}
+            {% set mediaCollection = searchMedia([exampleFileMediaId], context.context) %}
+
+            {% if mediaCollection and mediaCollection|length > 0 %}
+                {% set media = mediaCollection.get(exampleFileMediaId) %}
+
+                {% block fast_sale_shopping_cart_import_form_example_download2_inner %}
+                {% sw_include '@Storefront/storefront/component/tradelinepro/element/tag.html.twig' with {
+            name: 'a',
+                    attributes: {
+                        rel: 'nofollow',
+                        href: media.url,
+                        class: 'btn btn-secondary mt-2',
+                        target: '_blank',
+                    },
+
+                    text: 'fast-sale.exampleDownload'|trans|sw_sanitize ~ ' (' ~ media.fileExtension|upper ~ ')',
+                } %}
+                {% endblock %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+    {% endblock %}
+
+    {% endblock %}
+    {% endblock %}
+</div>
+{% endblock %}
+
+{% block fast_sale_shopping_cart_import_form_forward %}
+<input type="hidden" name="redirectTo" value="frontend.account.fast-sale.products.import">
+{% endblock %}
+
+</form>
+{% endblock %}
